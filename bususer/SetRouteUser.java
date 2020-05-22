@@ -1,12 +1,6 @@
-
 package visual.bususer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JCheckBox;
+import java.sql.*;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,7 +18,7 @@ public class SetRouteUser extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
@@ -134,7 +128,7 @@ public class SetRouteUser extends javax.swing.JFrame {
         });
         jPanel2.add(jComboBoxDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        jComboBoxActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- No Activity --", "Swimming", "Football", "Beavers", "Rainbows", "Cooking ", "Junk modeling", "Taekwondo", "Gymnastic", "Bricks for kids", "Engineering" }));
+        jComboBoxActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<html> </html>", "Swimming", "Football", "Beavers", "Rainbows", "Cooking ", "Junk modeling", "Taekwondo", "Gymnastic", "Bricks for kids", "Engineering" }));
         jPanel2.add(jComboBoxActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 202, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -181,7 +175,7 @@ public class SetRouteUser extends javax.swing.JFrame {
                 ResetMouseClicked(evt);
             }
         });
-        jPanel2.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, -1, 30));
+        jPanel2.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, -1, -1));
 
         SetRoute.setIcon(new javax.swing.ImageIcon("C:\\Users\\Anna Karenina\\Documents\\NetBeansProjects\\Visual\\Images\\Button\\Set route.png")); // NOI18N
         SetRoute.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,12 +183,12 @@ public class SetRouteUser extends javax.swing.JFrame {
                 SetRouteMouseClicked(evt);
             }
         });
-        jPanel2.add(SetRoute, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 560, -1, -1));
+        jPanel2.add(SetRoute, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 650));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 public Connection getConnection(){
         Connection con;
         
@@ -206,32 +200,57 @@ public Connection getConnection(){
         }
         return null;
     }
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
         this.dispose();
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }                                    
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {                                     
         setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }                                    
 
-    private void RouteIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RouteIdKeyTyped
+    private void RouteIdKeyTyped(java.awt.event.KeyEvent evt) {                                 
         if(Character.isLowerCase(evt.getKeyChar())){
             evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
         }
-    }//GEN-LAST:event_RouteIdKeyTyped
+    }                                
 
-    private void RouteNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RouteNumberKeyTyped
+    private void RouteNumberKeyTyped(java.awt.event.KeyEvent evt) {                                     
         if(Character.isLowerCase(evt.getKeyChar())){
             evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
         }
-    }//GEN-LAST:event_RouteNumberKeyTyped
+    }                                    
 
-    private void jComboBoxDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDepActionPerformed
+    private void jComboBoxDepActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDepActionPerformed
-
-    private void SetRouteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetRouteMouseClicked
-         UserId.setEditable(false);
+    }                                            
+public boolean checkUserNumberRoute (String RD, String RN){
+    boolean checkuser = false;
+    ResultSet rs;
+    PreparedStatement ps;
+    Connection c = getConnection();
+    String sql = "select * from coba_user_route where Route_number =? and Route_departure=?";
+    try{
+        ps = c.prepareStatement(sql);
+        ps.setString(1, RD);
+        ps.setString(2, RN);
+        rs = ps.executeQuery();
+        if (rs.next()){
+            checkuser = true;
+        }
+        
+    } catch (Exception e){
+        
+    } return checkuser;
+} 
+    private void SetRouteMouseClicked(java.awt.event.MouseEvent evt) {                                      
+        if(checkUserNumberRoute((String) jComboBoxDep.getSelectedItem(), RouteNumber.getText())){
+            JOptionPane.showMessageDialog(null, "Route can't be duplicate", "Set route", 2);
+        } else if(RouteNumber.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert route number");
+            } else if(RouteId.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert route id");
+            } else {
+        
         JComboBox jco = new JComboBox();
         jco.addItem("AM");
 
@@ -259,12 +278,13 @@ public Connection getConnection(){
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "Something went wrong");
         }
-    }//GEN-LAST:event_SetRouteMouseClicked
+     }
+    }                                     
 
-    private void ResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetMouseClicked
+    private void ResetMouseClicked(java.awt.event.MouseEvent evt) {                                   
         RouteId.setText("");
         RouteNumber.setText("");
-    }//GEN-LAST:event_ResetMouseClicked
+    }                                  
 
 
     public static void main(String args[]) {
@@ -276,7 +296,7 @@ public Connection getConnection(){
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     public javax.swing.JTextArea Address;
     public javax.swing.JTextField Class;
     public javax.swing.JTextField Name;
@@ -305,5 +325,5 @@ public Connection getConnection(){
     private javax.swing.JLabel jclass1;
     private javax.swing.JLabel jclass2;
     private javax.swing.JLabel jclass3;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

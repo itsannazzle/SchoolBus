@@ -1,12 +1,7 @@
 
 package visual.bususer;
 
-import visual.bususer.BusUser;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -50,8 +45,6 @@ public class addUser extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jRadioButtonFemale = new javax.swing.JRadioButton();
         jRadioButtonMale = new javax.swing.JRadioButton();
-        jLabel11 = new javax.swing.JLabel();
-        jComboBoxActivity = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         UserNumberTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -72,19 +65,25 @@ public class addUser extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(251, 236, 243));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("First name ");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 111, -1, -1));
 
         FirstNameTextField.setBorder(null);
         FirstNameTextField.setOpaque(false);
+        jPanel3.add(FirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 131, 110, 30));
 
         jLabel2.setText("Middle name ");
         jLabel2.setToolTipText("");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         MiddleNameTextField.setBorder(null);
         MiddleNameTextField.setOpaque(false);
+        jPanel3.add(MiddleNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 131, 110, 30));
 
         jLabel3.setText("Class ");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 231, -1, -1));
 
         ClassTextField.setBorder(null);
         ClassTextField.setOpaque(false);
@@ -93,14 +92,19 @@ public class addUser extends javax.swing.JFrame {
                 ClassTextFieldKeyTyped(evt);
             }
         });
+        jPanel3.add(ClassTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 251, 110, 30));
 
         jLabel4.setText("Address");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 301, -1, -1));
 
         AddressTextArea.setColumns(20);
         AddressTextArea.setRows(5);
         jScrollPane1.setViewportView(AddressTextArea);
 
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 321, 202, 90));
+
         jLabel5.setText("Emergency number ");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         EmergencyNumTextField.setBorder(null);
         EmergencyNumTextField.setOpaque(false);
@@ -109,45 +113,38 @@ public class addUser extends javax.swing.JFrame {
                 EmergencyNumTextFieldKeyTyped(evt);
             }
         });
+        jPanel3.add(EmergencyNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 30));
 
         jLabel9.setText("Last name ");
         jLabel9.setToolTipText("");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
 
         LastNameTextField1.setBorder(null);
         LastNameTextField1.setOpaque(false);
+        jPanel3.add(LastNameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 131, 110, 30));
 
         jLabel10.setText("Gender ");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 181, -1, -1));
 
         jRadioButtonFemale.setBackground(new java.awt.Color(251, 236, 243));
         jRadioButtonFemale.setText("Female");
-        jRadioButtonFemale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonFemaleActionPerformed(evt);
-            }
-        });
+        jPanel3.add(jRadioButtonFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 201, -1, -1));
 
         jRadioButtonMale.setBackground(new java.awt.Color(251, 236, 243));
         jRadioButtonMale.setText("Male");
-
-        jLabel11.setText("Activity ");
-
-        jComboBoxActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- No Activity --", "Swimming", "Football", "Beavers", "Rainbows", "Cooking ", "Junk modeling", "Taekwondo", "Gymnastic", "Bricks for kids", "Engineering" }));
-        jComboBoxActivity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxActivityActionPerformed(evt);
-            }
-        });
+        jPanel3.add(jRadioButtonMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 201, -1, -1));
 
         jLabel12.setText("User number ");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 61, -1, -1));
 
         UserNumberTextField.setBorder(null);
         UserNumberTextField.setOpaque(false);
-        UserNumberTextField.setRequestFocusEnabled(false);
         UserNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 UserNumberTextFieldKeyTyped(evt);
             }
         });
+        jPanel3.add(UserNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 81, 90, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,6 +154,7 @@ public class addUser extends javax.swing.JFrame {
                 jLabel7MouseClicked(evt);
             }
         });
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 20, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,20 +164,28 @@ public class addUser extends javax.swing.JFrame {
                 jLabel8MouseClicked(evt);
             }
         });
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 10, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Anna Karenina\\Documents\\NetBeansProjects\\Visual\\Images\\Dashboard\\add user.png")); // NOI18N
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 101, 90, 10));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 161, 110, 10));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 161, 110, 10));
 
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 161, 110, 10));
 
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 281, 110, 10));
 
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 150, 10));
 
         Reset.setIcon(new javax.swing.ImageIcon("C:\\Users\\Anna Karenina\\Documents\\NetBeansProjects\\Visual\\Images\\Button\\Reset.png")); // NOI18N
         Reset.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,6 +193,7 @@ public class addUser extends javax.swing.JFrame {
                 ResetMouseClicked(evt);
             }
         });
+        jPanel3.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 571, -1, 30));
 
         Add.setIcon(new javax.swing.ImageIcon("C:\\Users\\Anna Karenina\\Documents\\NetBeansProjects\\Visual\\Images\\Button\\Add.png")); // NOI18N
         Add.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,152 +201,7 @@ public class addUser extends javax.swing.JFrame {
                 AddMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(410, 410, 410)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel12))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(UserNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addGap(77, 77, 77)
-                .addComponent(jLabel2)
-                .addGap(78, 78, 78)
-                .addComponent(jLabel9))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(FirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(MiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(LastNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel10))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jRadioButtonFemale)
-                .addGap(21, 21, 21)
-                .addComponent(jRadioButtonMale))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(ClassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel11))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jComboBoxActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel5))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(EmergencyNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(Reset)
-                .addGap(35, 35, 35)
-                .addComponent(Add))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel12)
-                .addGap(6, 6, 6)
-                .addComponent(UserNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel9))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LastNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(jLabel10)
-                .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonFemale)
-                    .addComponent(jRadioButtonMale))
-                .addGap(7, 7, 7)
-                .addComponent(jLabel3)
-                .addGap(6, 6, 6)
-                .addComponent(ClassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel11)
-                .addGap(6, 6, 6)
-                .addComponent(jComboBoxActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jLabel5)
-                .addGap(6, 6, 6)
-                .addComponent(EmergencyNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Reset, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        jPanel3.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 571, -1, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 650));
 
@@ -355,7 +217,8 @@ public Connection getConnection(){
             ex.printStackTrace();
         }
         return null;
-    }public boolean checkUserNumber (String un){
+    }
+public boolean checkUserNumber (String un){
     boolean checkuser = false;
     ResultSet rs;
     PreparedStatement ps;
@@ -372,16 +235,13 @@ public Connection getConnection(){
     } catch (Exception e){
         
     } return checkuser;
-}    
+} 
+   
     private void EmergencyNumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmergencyNumTextFieldKeyTyped
        if(!Character.isDigit(evt.getKeyChar())){
            evt.consume();
        }
     }//GEN-LAST:event_EmergencyNumTextFieldKeyTyped
-
-    private void jRadioButtonFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFemaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonFemaleActionPerformed
 
     private void UserNumberTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserNumberTextFieldKeyTyped
         if(!Character.isDigit(evt.getKeyChar())){
@@ -395,10 +255,6 @@ public Connection getConnection(){
         }
     }//GEN-LAST:event_ClassTextFieldKeyTyped
 
-    private void jComboBoxActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActivityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxActivityActionPerformed
-
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabel8MouseClicked
@@ -408,6 +264,19 @@ public Connection getConnection(){
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void AddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMouseClicked
+            if(UserNumberTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert user number");
+            } else if(FirstNameTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert first name");
+            } else if(LastNameTextField1.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert last name");
+            } else if(ClassTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert class");
+            } else if(AddressTextArea.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert address");
+            } else if(EmergencyNumTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Insert emergency number");
+            } else {
         String Gender = "Female";
         if (jRadioButtonMale.isSelected()){
             Gender = "Male";
@@ -418,7 +287,7 @@ public Connection getConnection(){
         PreparedStatement ps;
         ResultSet rs;
         Connection c = getConnection();
-        String sql = "INSERT INTO bus_user VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO bus_user VALUES (?,?,?,?,?,?,?,?)";
         try{
             ps = c.prepareStatement(sql);
             ps.setString(1, UserNumberTextField.getText());
@@ -428,9 +297,7 @@ public Connection getConnection(){
             ps.setString(5, Gender);
             ps.setString(6, ClassTextField.getText());
             ps.setString(7, AddressTextArea.getText());
-            ps.setString(8, (String) jComboBoxActivity.getSelectedItem());
-            ps.setString(9, EmergencyNumTextField.getText());
-            
+            ps.setString(8, EmergencyNumTextField.getText());
             ps.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "New user added");
@@ -440,6 +307,17 @@ public Connection getConnection(){
             JOptionPane.showMessageDialog(null, "Something went wrong");
         }
         }
+        BusUser.AddRowToJTable(new Object[]{
+            UserNumberTextField.getText(),
+            FirstNameTextField.getText(),
+            MiddleNameTextField.getText(),
+            LastNameTextField1.getText(),
+            Gender,
+            ClassTextField.getText(),
+            AddressTextArea.getText(),
+            EmergencyNumTextField.getText(),
+        });
+            }
     }//GEN-LAST:event_AddMouseClicked
 
     private void ResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetMouseClicked
@@ -449,7 +327,6 @@ public Connection getConnection(){
         ClassTextField.setText("");
         AddressTextArea.setText("");
         EmergencyNumTextField.setText("");
-        jComboBoxActivity.setSelectedItem(null);
     }//GEN-LAST:event_ResetMouseClicked
 
    
@@ -472,10 +349,8 @@ public Connection getConnection(){
     private javax.swing.JTextField MiddleNameTextField;
     private javax.swing.JLabel Reset;
     private javax.swing.JTextField UserNumberTextField;
-    public javax.swing.JComboBox<String> jComboBoxActivity;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;

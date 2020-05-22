@@ -1,15 +1,10 @@
-
 package visual.bususer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class EditUser extends javax.swing.JFrame {
 
@@ -30,7 +25,7 @@ public class EditUser extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -51,10 +46,8 @@ public class EditUser extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         editLN = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         UN = new javax.swing.JTextField();
-        jComboBoxActivity = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jRadioButtonFemale = new javax.swing.JRadioButton();
         jRadioButtonMale = new javax.swing.JRadioButton();
@@ -143,7 +136,7 @@ public class EditUser extends javax.swing.JFrame {
                 editENKeyTyped(evt);
             }
         });
-        jPanel3.add(editEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 110, 30));
+        jPanel3.add(editEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 150, 30));
 
         jLabel9.setText("Last name");
         jLabel9.setToolTipText("");
@@ -151,18 +144,10 @@ public class EditUser extends javax.swing.JFrame {
 
         editLN.setBorder(null);
         editLN.setOpaque(false);
-        editLN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editLNActionPerformed(evt);
-            }
-        });
         jPanel3.add(editLN, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, 30));
 
         jLabel10.setText("Gender");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
-
-        jLabel11.setText("Activity ");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, -1, -1));
 
         jLabel12.setText("User number ");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
@@ -178,14 +163,6 @@ public class EditUser extends javax.swing.JFrame {
             }
         });
         jPanel3.add(UN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 110, 30));
-
-        jComboBoxActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- No Activity --", "Swimming", "Football", "Beavers", "Rainbows", "Cooking ", "Junk modeling", "Taekwondo", "Gymnastic", "Bricks for kids", "Engineering" }));
-        jComboBoxActivity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxActivityActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jComboBoxActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 202, 25));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(204, 0, 0));
@@ -216,7 +193,7 @@ public class EditUser extends javax.swing.JFrame {
         jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 110, 10));
 
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 110, 10));
+        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 150, 10));
 
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
         jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 110, 10));
@@ -227,46 +204,38 @@ public class EditUser extends javax.swing.JFrame {
                 SaveMouseClicked(evt);
             }
         });
-        jPanel3.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 90, 30));
+        jPanel3.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 90, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 650));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 650));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void MiddleNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiddleNameTextFieldActionPerformed
+    private void MiddleNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         // TODO add your handling code here:
-    }//GEN-LAST:event_MiddleNameTextFieldActionPerformed
+    }                                                   
 
-    private void jComboBoxActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActivityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxActivityActionPerformed
-
-    private void UNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UNKeyTyped
+    private void UNKeyTyped(java.awt.event.KeyEvent evt) {                            
         if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-    }//GEN-LAST:event_UNKeyTyped
+    }                           
 
-    private void editLNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editLNActionPerformed
-
-    private void editENKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editENKeyTyped
+    private void editENKeyTyped(java.awt.event.KeyEvent evt) {                                
         if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-    }//GEN-LAST:event_editENKeyTyped
+    }                               
 
-    private void editClassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editClassKeyTyped
+    private void editClassKeyTyped(java.awt.event.KeyEvent evt) {                                   
         if(Character.isLowerCase(evt.getKeyChar())){
             evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
         }
-    }//GEN-LAST:event_editClassKeyTyped
+    }                                  
 
-    private void SaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveMouseClicked
+    private void SaveMouseClicked(java.awt.event.MouseEvent evt) {                                  
        String Gender = "Female";
         if(jRadioButtonMale.isSelected()){
             Gender = "Male";
@@ -276,7 +245,7 @@ public class EditUser extends javax.swing.JFrame {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/coba", "root", "");
-            String sql = "UPDATE bus_user SET First_Name=?,Middle_Name=?,Last_Name=?,Gender=?,Class=?,Address =?,Activity =?,EmergencyNum =? WHERE user_number=?";
+            String sql = "UPDATE bus_user SET First_Name=?,Middle_Name=?,Last_Name=?,Gender=?,Class=?,Address =?,EmergencyNum =? WHERE user_number=?";            
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, editFN.getText());
             ps.setString(2, editMD.getText());
@@ -284,9 +253,8 @@ public class EditUser extends javax.swing.JFrame {
             ps.setString(4, Gender);
             ps.setString(5, editClass.getText());
             ps.setString(6, editAddress.getText());
-            ps.setString(7, (String) jComboBoxActivity.getSelectedItem());
-            ps.setString(8, editEN.getText());
-            ps.setString(9, UN.getText());
+            ps.setString(7, editEN.getText());
+            ps.setString(8, UN.getText());
             ps.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Edit success");
@@ -294,15 +262,16 @@ public class EditUser extends javax.swing.JFrame {
         catch (Exception ex){
             JOptionPane.showMessageDialog(null, "Something went wrong");
         }
-    }//GEN-LAST:event_SaveMouseClicked
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         this.dispose();
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }                                 
 
-    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        this.dispose();
+    }                                    
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {                                      
         setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel14MouseClicked
+    }                                     
 
     public static void main(String args[]) {
    
@@ -313,7 +282,7 @@ public class EditUser extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel Save;
     public javax.swing.JTextField UN;
     public javax.swing.JTextArea editAddress;
@@ -322,10 +291,8 @@ public class EditUser extends javax.swing.JFrame {
     public javax.swing.JTextField editFN;
     public javax.swing.JTextField editLN;
     public javax.swing.JTextField editMD;
-    public javax.swing.JComboBox<String> jComboBoxActivity;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -347,5 +314,5 @@ public class EditUser extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

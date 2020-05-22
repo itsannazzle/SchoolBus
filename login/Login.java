@@ -1,17 +1,9 @@
-
 package visual;
 
-import java.awt.Color;
+import java.sql.*;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 public class Login extends javax.swing.JFrame {
 
@@ -23,7 +15,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -83,19 +75,9 @@ public class Login extends javax.swing.JFrame {
 
         UsernameTextField.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         UsernameTextField.setForeground(new java.awt.Color(153, 153, 153));
-        UsernameTextField.setText("Enter username");
         UsernameTextField.setBorder(null);
         UsernameTextField.setOpaque(false);
-        UsernameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                UsernameTextFieldFocusGained(evt);
-            }
-        });
-        UsernameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsernameTextFieldActionPerformed(evt);
-            }
-        });
+        UsernameTextField.setRequestFocusEnabled(false);
         jPanel1.add(UsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 340, 30));
 
         jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
@@ -106,14 +88,10 @@ public class Login extends javax.swing.JFrame {
         PasswordField.setForeground(new java.awt.Color(153, 153, 153));
         PasswordField.setBorder(null);
         PasswordField.setOpaque(false);
-        PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                PasswordFieldFocusLost(evt);
-            }
-        });
+        PasswordField.setRequestFocusEnabled(false);
         PasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PasswordFieldKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PasswordFieldKeyTyped(evt);
             }
         });
         jPanel1.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 340, 30));
@@ -140,33 +118,17 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void PasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordFieldKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)        
-        LoginButton.doLayout();
-    }//GEN-LAST:event_PasswordFieldKeyPressed
-
-    private void UsernameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UsernameTextFieldFocusGained
-        UsernameTextField.setText("");
-    }//GEN-LAST:event_UsernameTextFieldFocusGained
-
-    private void PasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFieldFocusLost
-        PasswordField.setText("");
-    }//GEN-LAST:event_PasswordFieldFocusLost
-
-    private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UsernameTextFieldActionPerformed
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
         this.dispose();
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }                                    
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {                                     
         setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel8MouseClicked
- public Connection getConnection(){
+    }                                    
+ 
+    public Connection getConnection(){
         Connection con;
         
         try {
@@ -177,9 +139,8 @@ public class Login extends javax.swing.JFrame {
         }
         return null;
     }
-    private void LoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMouseClicked
+    private void LoginButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
        
-        String username = UsernameTextField.getText();
         String password = String.valueOf(PasswordField.getPassword());
         PreparedStatement ps;
         ResultSet rs ;
@@ -187,33 +148,37 @@ public class Login extends javax.swing.JFrame {
         String sql = "SELECT * FROM admin WHERE username = ? AND password = ? ";
         try{
         ps = c.prepareStatement(sql);
-        ps.setString(1, username);
+        ps.setString(1, UsernameTextField.getText());
         ps.setString(2, password);
         
         rs = ps.executeQuery();
         
         if (rs.next()){
             JOptionPane.showMessageDialog(null, "Login success");
-            HomePage homepage = new HomePage();
+            Dashboard homepage = new Dashboard();
             homepage.setVisible(true);
             homepage.pack();
             homepage.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.dispose();
             homepage.setExtendedState(MAXIMIZED_BOTH);
-            HomePage.AdminNameLabel.setText("Admin : "+username+"");
+            Dashboard.AdminNameLabel.setText("Admin : "+UsernameTextField.getText()+"");
             
         this.setLocationRelativeTo(null);
             
         } else {
             JOptionPane.showMessageDialog(null, "Username and password didn't match", "Login failed", 2);
-            UsernameTextField.setText("");
-            PasswordField.setText("");
+            
        }
         
         } catch (Exception e){
             System.out.println(e);
         } 
-    }//GEN-LAST:event_LoginButtonMouseClicked
+    }                                        
+
+    private void PasswordFieldKeyTyped(java.awt.event.KeyEvent evt) {                                       
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)        
+        LoginButton.doLayout();
+    }                                      
 
  
     public static void main(String args[]) {
@@ -227,10 +192,10 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel LoginButton;
     private javax.swing.JPasswordField PasswordField;
-    private javax.swing.JTextField UsernameTextField;
+    public javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,5 +205,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

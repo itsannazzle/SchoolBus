@@ -1,17 +1,15 @@
-
 package visual.bususer;
 
 
 public class user {
-    private String firstname,midname,lastname,gender,class1,address,activity,emergencynum,user_number;
-    public user(String FName, String MidName,String Lname,String gender,String class1, String Address,String Act,String Emergencynum, String user_number){
+    private String firstname,midname,lastname,gender,class1,address,emergencynum,user_number;
+    public user(String FName, String MidName,String Lname,String gender,String class1, String Address,String Emergencynum, String user_number){
         
         this.midname = MidName;
         this.firstname = FName;
         this.gender = gender;
         this.class1 = class1;
-        this.address = Address;
-        this.activity = Act; 
+        this.address = Address; 
         this.emergencynum = Emergencynum;
         this.user_number = user_number;
         this.lastname = Lname;
@@ -38,9 +36,6 @@ public class user {
     }
     public String getAddress(){
         return address;
-    }
-    public String getAct(){
-        return activity;
     }
     public String getEmergencynum(){
         return emergencynum;

@@ -1,12 +1,6 @@
-
 package visual.chaperone;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JComboBox;
+import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -25,7 +19,7 @@ public class AddChap extends javax.swing.JFrame {
 
    
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -100,7 +94,6 @@ public class AddChap extends javax.swing.JFrame {
 
         ChapEN.setBorder(null);
         ChapEN.setOpaque(false);
-        ChapEN.setRequestFocusEnabled(false);
         ChapEN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ChapENKeyTyped(evt);
@@ -116,6 +109,11 @@ public class AddChap extends javax.swing.JFrame {
 
         RouteNumber.setBorder(null);
         RouteNumber.setOpaque(false);
+        RouteNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                RouteNumberKeyTyped(evt);
+            }
+        });
         jPanel1.add(RouteNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 70, 30));
 
         jLabel12.setText("Route id ");
@@ -123,6 +121,11 @@ public class AddChap extends javax.swing.JFrame {
 
         RouteId.setBorder(null);
         RouteId.setOpaque(false);
+        RouteId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                RouteIdKeyTyped(evt);
+            }
+        });
         jPanel1.add(RouteId, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 110, 30));
 
         jComboBoxDepADDC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM1", "PM2", "PM3", "PM4" }));
@@ -181,7 +184,7 @@ public class AddChap extends javax.swing.JFrame {
                 AddMouseClicked(evt);
             }
         });
-        jPanel1.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, -1, -1));
+        jPanel1.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, -1, -1));
 
         Reset.setIcon(new javax.swing.ImageIcon("C:\\Users\\Anna Karenina\\Documents\\NetBeansProjects\\Visual\\Images\\Button\\Reset.png")); // NOI18N
         Reset.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,20 +192,20 @@ public class AddChap extends javax.swing.JFrame {
                 ResetMouseClicked(evt);
             }
         });
-        jPanel1.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 560, -1, -1));
+        jPanel1.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 670));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
         this.dispose();
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }                                    
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {                                     
         setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }                                    
 public Connection getConnection(){
         Connection con;
         
@@ -214,48 +217,107 @@ public Connection getConnection(){
         }
         return null;
     }
-    private void ChapENKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ChapENKeyTyped
+    private void ChapENKeyTyped(java.awt.event.KeyEvent evt) {                                
         if(!Character.isDigit(evt.getKeyChar())){
            evt.consume();
        }
-    }//GEN-LAST:event_ChapENKeyTyped
+    }                               
 
-    private void ChapPhoneNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ChapPhoneNumKeyTyped
+    private void ChapPhoneNumKeyTyped(java.awt.event.KeyEvent evt) {                                      
         if(!Character.isDigit(evt.getKeyChar())){
            evt.consume();
        }
-    }//GEN-LAST:event_ChapPhoneNumKeyTyped
-
-    private void AddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMouseClicked
-        PreparedStatement ps;
-        ResultSet rs;
-        Connection c = getConnection();
-        String sql = "insert into bus_chaperone values (?,?,?,?,?,?,?,?)";
-        try{
-            ps = c.prepareStatement(sql);
-            ps.setString(1, RouteId.getText());
-            ps.setString(2, (String) jComboBoxDepADDC.getSelectedItem());
-            ps.setString(3, RouteNumber.getText());
-            ps.setString(4, ChapEN.getText());
-            ps.setString(5, ChapName.getText());
-            ps.setString(6, ChapStandby.getText());
-            ps.setString(7, ChapAddress.getText());
-            ps.setString(8, ChapPhoneNum.getText());
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Chaperone added");
+    }                                     
+public boolean CheckRoute (String Dep,String Num){
+    boolean checkuser = false;
+    ResultSet rs;
+    PreparedStatement ps;
+    Connection c = getConnection();
+    String sql = "select * from bus_chaperone WHERE Route_departure=? AND Route_number=?";
+    try{
+        ps = c.prepareStatement(sql);
+        ps.setString(1, Dep);
+        ps.setString(2, Num);
+        rs = ps.executeQuery();
+        if (rs.next()){
+            checkuser = true;
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Something went wrong");
-        }
-    }//GEN-LAST:event_AddMouseClicked
+        
+    } catch (Exception e){
+        
+    } return checkuser;
+} 
+    private void AddMouseClicked(java.awt.event.MouseEvent evt) {                                 
+        if(ChapEN.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "Insert employee number"); 
+        } else if(ChapName.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Insert name");
+        } else if(ChapStandby.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Insert standby");
+        } else if(ChapPhoneNum.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Insert phone number");
+        } else if(ChapAddress.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Insert address");
+        } else if(RouteNumber.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Insert route number");
+        } else if(RouteId.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Insert route id");
+        } else if(CheckRoute((String) jComboBoxDepADDC.getSelectedItem(),RouteNumber.getText())){
+                JOptionPane.showMessageDialog(null, "Route is taken", "Add route", 2);
+            }else {
+            PreparedStatement ps;
+            ResultSet rs;
+            Connection c = getConnection();
+            String sql = "insert into bus_chaperone values (?,?,?,?,?,?,?,?)";
+            try{
+                ps = c.prepareStatement(sql);
+                ps.setString(1, RouteId.getText());
+                ps.setString(2, (String) jComboBoxDepADDC.getSelectedItem());
+                ps.setString(3, RouteNumber.getText());
+                ps.setString(4, ChapEN.getText());
+                ps.setString(5, ChapName.getText());
+                ps.setString(6, ChapStandby.getText());
+                ps.setString(7, ChapAddress.getText());
+                ps.setString(8, ChapPhoneNum.getText());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Chaperone added");
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+                
+            }
+            BusChaperone.AddRowToJTable(new Object[]{
+                RouteId.getText(),
+                jComboBoxDepADDC.getSelectedItem(),
+                RouteNumber.getText(),
+                ChapEN.getText(),
+                ChapName.getText(),
+                ChapStandby.getText(),
+                ChapAddress.getText(),
+                ChapPhoneNum.getText(),
+            });
+        }                                      
+    }                                
 
-    private void ResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetMouseClicked
+    private void ResetMouseClicked(java.awt.event.MouseEvent evt) {                                   
          ChapEN.setText("");
         ChapName.setText("");
         ChapStandby.setText("");
         ChapAddress.setText("");
         ChapPhoneNum.setText("");
-    }//GEN-LAST:event_ResetMouseClicked
+    }                                  
+
+    private void RouteNumberKeyTyped(java.awt.event.KeyEvent evt) {                                     
+       if(Character.isLowerCase(evt.getKeyChar())){
+            evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
+        }
+    }                                    
+
+    private void RouteIdKeyTyped(java.awt.event.KeyEvent evt) {                                 
+        if(Character.isLowerCase(evt.getKeyChar())){
+            evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
+        }
+    }                                
 
     /**
      * @param args the command line arguments
@@ -292,7 +354,7 @@ public Connection getConnection(){
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel Add;
     private javax.swing.JTextArea ChapAddress;
     private javax.swing.JTextField ChapEN;
@@ -322,5 +384,5 @@ public Connection getConnection(){
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
